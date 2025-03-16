@@ -1,9 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { getNewProducts, getBestSellers } from '../services/api';
+import React, { useEffect, useState, useRef, useContext } from 'react'; // Thêm useContext
+import { Link, useNavigate } from 'react-router-dom'; // Thêm useNavigate
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { getNewProducts, getBestSellers, addToCart } from '../services/api';
 import '../css/Home.css';
 
 const Home = () => {
+  const { token } = useContext(AuthContext); // Lấy token từ AuthContext
+  const navigate = useNavigate(); // Dùng để chuyển hướng
   const [newProducts, setNewProducts] = useState([]);
   const [bestSellers, setBestSellers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,8 +19,6 @@ const Home = () => {
       try {
         const newProductsData = await getNewProducts();
         const bestSellersData = await getBestSellers();
-
-        // Limit number of products to 6 for New Products
         setNewProducts(newProductsData.slice(0, 6));
         setBestSellers(bestSellersData);
         setLoading(false);
@@ -30,33 +31,28 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  // Sample data for carousel - using public/images path
   const carouselImages = [
-    { id: 1, src: '/images/carousel-1.jpg', alt: 'Carousel 1'},
-    { id: 2, src: '/images/carousel-2.jpg', alt: 'Carousel 2'},
-    { id: 3, src: '/images/carousel-3.jpg', alt: 'Carousel 3'},
+    { id: 1, src: '/images/carousel-1.jpg', alt: 'Carousel 1' },
+    { id: 2, src: '/images/carousel-2.jpg', alt: 'Carousel 2' },
+    { id: 3, src: '/images/carousel-3.jpg', alt: 'Carousel 3' },
   ];
 
   const smallImages = [
-    { id: 1, src: '/images/small-1.jpg', alt: 'Small 1'},
-    { id: 2, src: '/images/small-2.jpg', alt: 'Small 2'},
-    { id: 3, src: '/images/small-3.jpg', alt: 'Small 3'},
+    { id: 1, src: '/images/small-1.jpg', alt: 'Small 1' },
+    { id: 2, src: '/images/small-2.jpg', alt: 'Small 2' },
+    { id: 3, src: '/images/small-3.jpg', alt: 'Small 3' },
   ];
 
   useEffect(() => {
-    // Setup autoplay for carousel
     startAutoplay();
-
-    return () => {
-      stopAutoplay();
-    };
+    return () => stopAutoplay();
   }, [currentSlide]);
 
   const startAutoplay = () => {
     stopAutoplay();
     autoplayRef.current = setInterval(() => {
       handleNextSlide();
-    }, 5000); // Auto-change slide every 5 seconds
+    }, 5000);
   };
 
   const stopAutoplay = () => {
@@ -77,7 +73,6 @@ const Home = () => {
     setCurrentSlide(index);
   };
 
-  // Format price to GBP
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
@@ -85,15 +80,32 @@ const Home = () => {
     }).format(price || 0);
   };
 
-  // Function to truncate description text
   const truncateDescription = (text, maxLength = 100) => {
     if (!text) return 'No description available';
     return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
   };
 
+  // Hàm xử lý thêm vào giỏ hàng
+  const handleAddToCart = async (productId) => {
+    if (!token) {
+      // Nếu chưa đăng nhập, chuyển hướng đến trang login
+      alert('Please login to add products to your cart.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      await addToCart({ productId, quantity: 1 }, token);
+      alert('Product added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add product to cart. Please try again.');
+    }
+  };
+
   return (
     <div className="home-page">
-      {/* Carousel Section (Navbar with 3 large images) */}
+      {/* Carousel Section */}
       <section className="carousel-section" onMouseEnter={stopAutoplay} onMouseLeave={startAutoplay}>
         <div className="container carousel-container" ref={carouselRef}>
           <div className="carousel-inner">
@@ -182,7 +194,12 @@ const Home = () => {
                         <Link to={`/product/${product._id}`} className="btn btn-view">
                           View Details
                         </Link>
-                        <button className="btn btn-cart">Add to Cart</button>
+                        <button 
+                          className="btn btn-cart" 
+                          onClick={() => handleAddToCart(product._id)} // Gọi hàm handleAddToCart
+                        >
+                          Add to Cart
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -239,7 +256,12 @@ const Home = () => {
                         <Link to={`/product/${product._id}`} className="btn btn-view">
                           View Details
                         </Link>
-                        <button className="btn btn-cart">Add to Cart</button>
+                        <button 
+                          className="btn btn-cart" 
+                          onClick={() => handleAddToCart(product._id)} // Gọi hàm handleAddToCart
+                        >
+                          Add to Cart
+                        </button>
                       </div>
                     </div>
                   </div>

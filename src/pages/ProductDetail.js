@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react'; // Thêm useContext
 import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
+import { getProduct, getRelatedProducts, addToCart } from '../services/api'; // Thêm addToCart
 import '../css/ProductDetail.css';
-import { getProduct, getRelatedProducts } from '../services/api';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext); // Lấy token từ AuthContext
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +30,6 @@ const ProductDetail = () => {
         setProduct(data);
         setCurrentImageIndex(0);
 
-        // Fetch related products after we have the product data
         if (data && data.category) {
           fetchRelatedProducts(data.category);
         }
@@ -52,10 +53,7 @@ const ProductDetail = () => {
       const data = await getRelatedProducts(category);
       console.log('Related products data:', data);
 
-      // Filter out the current product if it's in the related products list
-      const filteredProducts = data.filter(item => item.id !== id);
-
-      // Get up to 4 related products
+      const filteredProducts = data.filter(item => item._id !== id); // Sửa từ item.id thành item._id
       setRelatedProducts(filteredProducts.slice(0, 4));
     } catch (err) {
       console.error('Error fetching related products:', err);
@@ -66,12 +64,11 @@ const ProductDetail = () => {
 
   const handleImageClick = (index) => {
     if (index > currentImageIndex) {
-      setSlideDirection('slide-left'); // Slide to left to show next image (which comes from right)
+      setSlideDirection('slide-left');
     } else if (index < currentImageIndex) {
-      setSlideDirection('slide-right'); // Slide to right to show previous image (which comes from left)
+      setSlideDirection('slide-right');
     }
 
-    // Reset animation after changing image
     setTimeout(() => {
       setCurrentImageIndex(index);
       setTimeout(() => {
@@ -95,7 +92,6 @@ const ProductDetail = () => {
     if (product?.imageUrls?.length > 1 && currentImageIndex > 0) {
       setSlideDirection('slide-right');
 
-      // Reset animation after changing image
       setTimeout(() => {
         setCurrentImageIndex(prevIndex => prevIndex - 1);
         setTimeout(() => {
@@ -109,7 +105,6 @@ const ProductDetail = () => {
     if (product?.imageUrls?.length > 1 && currentImageIndex < product.imageUrls.length - 1) {
       setSlideDirection('slide-left');
 
-      // Reset animation after changing image
       setTimeout(() => {
         setCurrentImageIndex(prevIndex => prevIndex + 1);
         setTimeout(() => {
@@ -120,14 +115,27 @@ const ProductDetail = () => {
   };
 
   const navigateToProduct = (productId) => {
-    // Check if productId exists before navigating
     if (productId) {
-      // Using window.location to force a full refresh to ensure state is reset
       window.location.href = `/product/${productId}`;
-      // Alternative without page refresh
-      // navigate(`/products/${productId}`);
     } else {
       console.error('Attempted to navigate to a product with undefined ID');
+    }
+  };
+
+  // Hàm xử lý thêm vào giỏ hàng
+  const handleAddToCart = async () => {
+    if (!token) {
+      alert('Please login to add products to your cart.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      await addToCart({ productId: id, quantity }, token);
+      alert('Product added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add product to cart. Please try again.');
     }
   };
 
@@ -172,7 +180,7 @@ const ProductDetail = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="product-detail-container">
-        <button className="back-button" onClick={goBack}>&larr; Back</button>
+        <button className="back-button" onClick={goBack}>← Back</button>
 
         <div className="product-detail">
           <h1>{product.name}</h1>
@@ -185,7 +193,6 @@ const ProductDetail = () => {
                   onClick={goToPrevImage}
                   disabled={currentImageIndex === 0}
                 >
-                  &lt;
                 </button>
 
                 <div className={`slider-container ${slideDirection}`}>
@@ -213,7 +220,7 @@ const ProductDetail = () => {
                   onClick={goToNextImage}
                   disabled={!product.imageUrls || currentImageIndex === product.imageUrls.length - 1}
                 >
-                  &gt;
+                  
                 </button>
               </div>
 
@@ -260,7 +267,7 @@ const ProductDetail = () => {
                   />
                 </div>
 
-                <button className="add-to-cart">Add to Cart</button>
+                <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
                 <button className="add-to-wishlist">Add to Wishlist</button>
               </div>
             </div>
@@ -276,7 +283,7 @@ const ProductDetail = () => {
               <div className="related-products-grid">
                 {relatedProducts.map((relatedProduct) => (
                   <div
-                    key={relatedProduct.id}
+                    key={relatedProduct._id}
                     className="related-product-card"
                     onClick={() => navigateToProduct(relatedProduct._id)}
                     style={{ cursor: 'pointer' }}
@@ -299,15 +306,6 @@ const ProductDetail = () => {
                       <div className="related-product-price">
                         {formatPrice(relatedProduct.price)}
                       </div>
-                      <button
-                        className="related-product-add-to-cart"
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevent clicking through to the product detail
-                          // Add to cart logic here
-                        }}
-                      >
-                        Add to Cart
-                      </button>
                     </div>
                   </div>
                 ))}

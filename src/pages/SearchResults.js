@@ -23,16 +23,16 @@ const SearchResults = () => {
   return (
     <div className="search-results-page">
       <div className="container">
-        <h1 className="page-title">Kết quả tìm kiếm: "{keyword}"</h1>
+        <h1 className="page-title">Search result: "{keyword}"</h1>
         
         {results.length === 0 ? (
           <div className="no-results">
-            <p>Không tìm thấy sản phẩm nào phù hợp với từ khóa "{keyword}"</p>
+            <p>No products were found matching the keyword "{keyword}"</p>
             <Link to="/" className="btn btn-primary">Quay lại trang chủ</Link>
           </div>
         ) : (
           <>
-            <p className="results-count">Tìm thấy {results.length} sản phẩm</p>
+            <p className="results-count">Find {results.length} products</p>
             <div className="products-grid">
               {results.map((product) => (
                 <div className="product-card" key={product._id}>
@@ -52,9 +52,9 @@ const SearchResults = () => {
                     <p className="product-description">{truncateDescription(product.description)}</p>
                     <div className="product-actions">
                       <Link to={`/product/${product._id}`} className="btn btn-view">
-                        Xem chi tiết
+                        View details
                       </Link>
-                      <button className="btn btn-cart">Thêm vào giỏ</button>
+                      <button className="btn btn-cart">Add to cart</button>
                     </div>
                   </div>
                 </div>
