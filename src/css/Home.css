@@ -59,8 +59,9 @@
 .carousel-content p {
   display: none;
 }
+
 .carousel-btn-shop {
-  font-size: 0.9rem; /* Thu nhỏ kích thước chữ */
+  font-size: 0.9rem;
   padding: 5px 10px;
   background: #ff6f00;
   color: white;
@@ -296,9 +297,8 @@
   font-size: 1.2rem;
   margin-bottom: 10px;
   display: block;
-  color: #212529; /* Màu đen hoặc bất kỳ màu nào bạn muốn */
+  color: #212529;
 }
-
 
 .product-price {
   font-size: 1.2rem;
@@ -322,10 +322,12 @@
 }
 
 .btn {
-  display: inline-block;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
   font-size: 0.9rem;
   text-align: center;
   cursor: pointer;
@@ -334,24 +336,70 @@
   flex: 1;
 }
 
+/* View Detail Button */
 .btn-view {
-  background-color: #f8f9fa;
-  color: #212529;
-  border: 1px solid #dee2e6;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient xanh nhạt */
+  color: #333;
+  border: none;
+  box-shadow: 0 4px 10px rgba(161, 196, 253, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-view:hover {
-  background-color: #e9ecef;
+  background: linear-gradient(135deg, #c2e9fb, #a1c4fd); /* Đảo gradient */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(161, 196, 253, 0.5);
 }
 
+.btn-view:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(161, 196, 253, 0.3);
+}
+
+.btn-view::before {
+  content: '\f06e'; /* FontAwesome icon eye (fa-eye) */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn-view:hover::before {
+  transform: scale(1.2); /* Phóng to icon khi hover */
+}
+
+/* Add to Cart Button */
 .btn-cart {
-  background-color: #ff4500;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53); /* Gradient đỏ - cam */
   color: #fff;
   border: none;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-cart:hover {
-  background-color: #ff6347;
+  background: linear-gradient(135deg, #ff8e53, #ff6b6b); /* Đảo gradient */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
+}
+
+.btn-cart:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.btn-cart::before {
+  content: '\f218'; /* FontAwesome icon giỏ hàng (fa-shopping-cart) */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+
+.btn-cart:hover::before {
+  transform: scale(1.2); /* Phóng to icon khi hover */
 }
 
 /* Large Promo Banner */

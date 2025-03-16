@@ -290,7 +290,7 @@ h1:after {
 /* Product image container */
 .product-grid > div .product-image-container {
   width: 100%;
-  height: 200px; /* Adjusted height for better proportions in 4-column layout */
+  height: 200px;
   background-color: #000;
   overflow: hidden;
   position: relative;
@@ -312,7 +312,7 @@ h1:after {
 }
 
 .product-grid > div h3 {
-  font-size: 1rem; /* Slightly smaller font for 4-column layout */
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: #333;
@@ -320,7 +320,7 @@ h1:after {
 
 .product-grid > div .product-description {
   color: #666;
-  font-size: 0.85rem; /* Slightly smaller font for 4-column layout */
+  font-size: 0.85rem;
   margin-bottom: 1rem;
   line-height: 1.5;
   flex-grow: 1;
@@ -328,9 +328,52 @@ h1:after {
 
 .product-grid > div .product-price {
   font-weight: 700;
-  font-size: 1.1rem; /* Slightly smaller font for 4-column layout */
+  font-size: 1.1rem;
   color: #ff0000;
   margin-top: auto;
+}
+
+/* Add to Cart button styling */
+.product-grid > div .btn-cart {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53); /* Gradient đỏ - cam */
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1rem; /* Khoảng cách với giá */
+}
+
+.product-grid > div .btn-cart:hover {
+  background: linear-gradient(135deg, #ff8e53, #ff6b6b); /* Đảo gradient khi hover */
+  transform: translateY(-2px); /* Nâng lên nhẹ */
+  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
+}
+
+.product-grid > div .btn-cart:active {
+  transform: translateY(0); /* Trở lại vị trí khi nhấn */
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.product-grid > div .btn-cart::before {
+  content: '\f218'; /* FontAwesome icon giỏ hàng (fa-shopping-cart) */
+  font-family: 'Font Awesome 5 Free'; /* Đảm bảo bạn đã import Font Awesome */
+  font-weight: 900;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+
+.product-grid > div .btn-cart:hover::before {
+  transform: scale(1.2); /* Phóng to icon khi hover */
 }
 
 /* Loading state styling */
