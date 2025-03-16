@@ -329,7 +329,7 @@ h1:after {
 .product-grid > div .product-price {
   font-weight: 700;
   font-size: 1.1rem; /* Slightly smaller font for 4-column layout */
-  color: #6366f1;
+  color: #ff0000;
   margin-top: auto;
 }
 

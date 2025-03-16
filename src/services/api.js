@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-// Đổi tên biến từ API thành api để phù hợp với cách sử dụng
 const api = axios.create({ baseURL: 'http://localhost:5000/api' });
 
-// Lấy danh sách sản phẩm
+// PRODUCTS APIs
+// Lấy danh sách tất cả sản phẩm
 export const getProducts = async () => {
   try {
     const response = await api.get('/products');
@@ -25,18 +25,135 @@ export const getProduct = async (id) => {
   }
 };
 
-// Tìm kiếm sản phẩm theo từ khóa
-export const searchProducts = async (keyword) => {
+// Lấy danh sách sản phẩm liên quan theo category
+export const getRelatedProducts = async (category) => {
   try {
-    const response = await api.get(`/products/search/${keyword}`);
+    const response = await api.get(`/products/related/${category}`);
     return response.data;
   } catch (error) {
-    console.error(`Error searching products with keyword "${keyword}":`, error);
+    console.error(`Error fetching related products for category "${category}":`, error);
     throw error;
   }
 };
 
-// Lấy sản phẩm theo danh mục
+// Lấy danh sách sản phẩm mới
+export const getNewProducts = async () => {
+  try {
+    const response = await api.get('/products/home/new-products');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching new products:', error);
+    throw error;
+  }
+};
+
+// Lấy danh sách sản phẩm best seller
+export const getBestSellers = async () => {
+  try {
+    const response = await api.get('/products/home/best-sellers');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching best sellers:', error);
+    throw error;
+  }
+};
+
+// Lấy cả sản phẩm mới và best seller cho trang home
+export const getFeaturedProducts = async () => {
+  try {
+    const response = await api.get('/products/home/featured');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching featured products:', error);
+    throw error;
+  }
+};
+
+// Tạo mới một sản phẩm
+export const createProduct = async (data, token) => {
+  try {
+    const response = await api.post('/products', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating product:', error);
+    throw error;
+  }
+};
+
+// Cập nhật thông tin sản phẩm
+export const updateProduct = async (id, data, token) => {
+  try {
+    const response = await api.put(`/products/${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating product with ID ${id}:`, error);
+    throw error;
+  }
+};
+
+// Xóa sản phẩm
+export const deleteProduct = async (id, token) => {
+  try {
+    const response = await api.delete(`/products/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting product with ID ${id}:`, error);
+    throw error;
+  }
+};
+
+// Cập nhật trạng thái best seller
+export const setBestSellerStatus = async (id, isBestSeller, token) => {
+  try {
+    const response = await api.put(
+      `/products/${id}/set-bestseller`,
+      { isBestSeller },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating bestseller status for product ${id}:`, error);
+    throw error;
+  }
+};
+
+// Cập nhật trạng thái sản phẩm mới
+export const setNewProductStatus = async (id, isNewProduct, token) => {
+  try {
+    const response = await api.put(
+      `/products/${id}/set-new-product`,
+      { isNewProduct },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating new product status for product ${id}:`, error);
+    throw error;
+  }
+};
+
+// Cập nhật số lượng bán
+export const updateSalesCount = async (id, salesCount, token) => {
+  try {
+    const response = await api.put(
+      `/products/${id}/update-sales`,
+      { salesCount },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating sales count for product ${id}:`, error);
+    throw error;
+  }
+};
+
+// Tìm kiếm sản phẩm theo danh mục
 export const getProductsByCategory = async (category) => {
   try {
     const response = await api.get(`/products/category/${category}`);
@@ -47,13 +164,13 @@ export const getProductsByCategory = async (category) => {
   }
 };
 
-// Lấy danh sách sản phẩm liên quan
-export const getRelatedProducts = async (category) => {
+// Tìm kiếm sản phẩm theo từ khóa
+export const searchProducts = async (keyword) => {
   try {
-    const response = await api.get(`/products/related/${category}`);
+    const response = await api.get(`/products/search/${keyword}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching related products for category "${category}":`, error);
+    console.error(`Error searching products with keyword "${keyword}":`, error);
     throw error;
   }
 };

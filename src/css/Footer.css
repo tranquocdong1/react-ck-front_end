@@ -1,0 +1,219 @@
+.site-footer {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin-top: 20px; /* Thêm khoảng cách phía trên */
+}
+
+.footer-main {
+  padding: 50px 0;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  padding: 0 15px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.contact-info li span {
+  display: inline-block;
+  max-width: 100%; /* Giới hạn chiều rộng tối đa */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Hiển thị dấu ... nếu nội dung quá dài */
+}
+
+.contact-info li:first-child span {
+  line-height: 1.4;
+}
+
+/* Logo & Description */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.diamond-icon {
+  width: 250px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.brand-text {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  margin: 15px 0;
+  font-weight: 600;
+  color: #fff;
+}
+
+.footer-column p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+/* Payment Cards */
+.payment-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.card-row img {
+  width: 45px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+/* Contact Info */
+.contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  color: #999;
+}
+
+.contact-info i {
+  min-width: 20px;
+  margin-right: 10px;
+  color: #fff;
+}
+
+.contact-info a {
+  color: #999;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #D4AF37;
+}
+
+/* App Stores */
+.app-stores {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app-button img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  padding: 20px 0;
+  border-top: 1px solid #333;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  gap: 15px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 16px;
+}
+
+.social-links a:hover {
+  color: #D4AF37;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Go to Top Button */
+.go-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #D4AF37;
+  color: #000;
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.go-to-top:hover {
+  background-color: #F1C40F;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+  .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Chia đều 4 cột */
+    gap: 20px;
+  }
+  
+  .footer-column {
+    flex: none; /* Hủy flex để tránh co giãn không đều */
+    min-width: 0; /* Bỏ min-width để tránh ép rộng */
+    width: 100%; /* Đảm bảo chiều rộng đúng theo grid */
+  }
+  
+  .contact-info li span {
+    display: block; /* Hiển thị dạng block thay vì inline-block */
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .payment-cards, .card-row {
+    justify-content: center;
+  }
+  
+  .app-stores {
+    align-items: center;
+  }
+}

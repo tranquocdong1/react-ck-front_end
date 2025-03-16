@@ -1,0 +1,289 @@
+.site-header {
+  font-family: Arial, sans-serif;
+  margin-bottom: 20px; /* Thêm khoảng cách phía dưới */
+}
+
+.header-wrap {
+  width: 100%;
+}
+
+/* Top Header */
+.top-header {
+  background-color: #000;
+  color: #fff;
+}
+
+.top-bar .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  display: flex;
+  gap: 20px;
+}
+
+.contact-info a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-info i {
+  margin-right: 5px;
+}
+
+.right-top-bar {
+  display: flex;
+  align-items: center;
+}
+
+.social-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 14px;
+}
+
+.account-links {
+  margin-left: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.account-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Site Branding */
+#site-branding {
+  background-color: #000;
+  padding: 15px 0;
+}
+
+#site-branding .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.diamond-icon {
+  width: 250px;  /* Increase from 50px to 80px for larger size */
+  height: auto;
+  margin-right: 15px;
+}
+
+.brand-text {
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#search-box {
+  position: relative;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-field {
+  padding: 10px 15px;
+  width: 300px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 14px;
+}
+
+.search-button {
+  background-color: #D4AF37; /* Gold color */
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.wishlist-box, .cart-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.wishlist-link, .cart-link {
+  color: #fff;
+  font-size: 18px;
+  position: relative;
+  text-decoration: none;
+}
+
+.counter {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #D4AF37; /* Gold color */
+  color: #fff;
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-total {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 12px;
+}
+
+.amount {
+  font-weight: bold;
+}
+
+/* Main Navigation */
+#main-navigation {
+  background-color: #333;
+}
+
+#main-navigation .wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.primary-menu {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-menu > li {
+  position: relative;
+}
+
+.nav-menu > li > a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 15px 20px;
+  display: block;
+  font-size: 14px;
+}
+
+.menu-item-has-children {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item-has-children i {
+  color: #fff;
+  font-size: 12px;
+  margin-left: -15px;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  min-width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.menu-item-has-children:hover .sub-menu {
+  display: block;
+}
+
+.sub-menu li a {
+  color: #333;
+  padding: 8px 20px;
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.sub-menu li a:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .top-bar .wrap,
+  #site-branding .wrap {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .right-top-bar,
+  .contact-info {
+    margin-top: 10px;
+  }
+  
+  .header-right {
+    margin-top: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .search-field {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+  }
+  
+  .menu-item-has-children .sub-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    padding-left: 20px;
+  }
+}

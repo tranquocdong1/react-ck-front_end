@@ -1,0 +1,500 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Carousel Section */
+.carousel-section {
+  position: relative;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.carousel-container {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  overflow: hidden;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+  height: auto;
+  text-align: right;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.carousel-content h2,
+.carousel-content p {
+  display: none;
+}
+.carousel-btn-shop {
+  font-size: 0.9rem; /* Thu nhỏ kích thước chữ */
+  padding: 5px 10px;
+  background: #ff6f00;
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.3s ease-in-out;
+}
+
+.carousel-btn-shop:hover {
+  background-color: #ff6347;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #fff;
+  width: 30px;
+  border-radius: 10px;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small Images Section */
+.small-images {
+  padding: 20px 0 40px;
+}
+
+.small-images-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.small-image-card {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.small-image-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.small-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.small-image-card:hover img {
+  transform: scale(1.05);
+}
+
+.small-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.small-image-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Product Sections Common Styles */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #ff4500;
+}
+
+.loading {
+  text-align: center;
+  padding: 30px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-tags {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.tag {
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.tag.new {
+  background-color: #ff4500;
+}
+
+.tag.bestseller {
+  background-color: #4CAF50;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+  color: #212529; /* Màu đen hoặc bất kỳ màu nào bạn muốn */
+}
+
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ff4500;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #666;
+  overflow: hidden;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  flex: 1;
+}
+
+.btn-view {
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #dee2e6;
+}
+
+.btn-view:hover {
+  background-color: #e9ecef;
+}
+
+.btn-cart {
+  background-color: #ff4500;
+  color: #fff;
+  border: none;
+}
+
+.btn-cart:hover {
+  background-color: #ff6347;
+}
+
+/* Large Promo Banner */
+.large-image {
+  padding: 40px 0;
+}
+
+.promo-banner {
+  position: relative;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.large-image-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promo-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10%;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.promo-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.promo-content p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  max-width: 400px;
+}
+
+.btn-shop {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #ff4500;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+  align-self: flex-start;
+}
+
+.btn-shop:hover {
+  background-color: #ff6347;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+}
+
+/* New Products & Best Sellers Sections */
+.new-products, .best-sellers {
+  padding: 40px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .carousel-inner {
+    height: 400px;
+  }
+  
+  .carousel-content h2 {
+    font-size: 2.5rem;
+  }
+  
+  .carousel-content p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-inner {
+    height: 350px;
+  }
+  
+  .carousel-content h2 {
+    font-size: 2rem;
+  }
+  
+  .carousel-content p {
+    font-size: 1rem;
+  }
+  
+  .small-images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-inner {
+    height: 250px;
+  }
+  
+  .carousel-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .carousel-content p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .carousel-btn-shop {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+  }
+  
+  .small-images-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .promo-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .promo-content p {
+    font-size: 1rem;
+  }
+}

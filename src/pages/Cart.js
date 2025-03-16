@@ -62,7 +62,7 @@ const Cart = () => {
       {loading ? (
         <p>Loading...</p>
       ) : cart.length === 0 ? (
-        <p>Your cart is empty. <Link to="/">Shop now</Link></p>
+        <p>Your cart is empty. <Link to="/product">Shop now</Link></p>
       ) : (
         <>
           {cart.map((item, index) => (
