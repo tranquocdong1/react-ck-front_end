@@ -59,10 +59,15 @@ export const getRelatedProducts = async (category) => {
 };
 
 // Giữ nguyên các API khác (Cart, Auth, Orders, Wishlist) nhưng đổi API thành api
-export const getCart = (token) =>
+export const getCart = (token) => 
   api.get('/cart', { headers: { Authorization: `Bearer ${token}` } });
-export const addToCart = (data, token) =>
+export const addToCart = (data, token) => 
   api.post('/cart/add', data, { headers: { Authorization: `Bearer ${token}` } });
+export const removeFromCart = (data, token) => 
+  api.delete('/cart/remove', { 
+    headers: { Authorization: `Bearer ${token}` },
+    data: data
+  });
 export const login = (data) => api.post('/auth/login', data);
 export const register = (data) => api.post('/auth/register', data);
 export const getOrders = (token) =>
