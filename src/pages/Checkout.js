@@ -47,7 +47,7 @@ const Checkout = () => {
     // Here you would add the logic to submit the order
     // For example: await createOrder({ ...formData, items: cart, shippingFee }, token);
     alert('Order placed successfully!');
-    navigate('/order-confirmation');
+    navigate('/orders');
   };
 
   // Calculate subtotal
