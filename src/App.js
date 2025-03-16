@@ -11,6 +11,7 @@ import Orders from './pages/Orders';
 import Wishlist from './pages/Wishlist';
 import Home from './pages/Home';
 import SearchResults from './pages/SearchResults';
+import Checkout from './pages/Checkout';
 
 const App = () => (
   <AuthProvider>
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/search-results" element={<SearchResults />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/wishlist" element={<Wishlist />} />
