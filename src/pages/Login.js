@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     const success = await handleLogin(email, password);
     if (success) {
-      navigate('/product'); // Chuyển về trang chủ sau khi đăng nhập
+      navigate('/'); // Chuyển về trang chủ sau khi đăng nhập
     } else {
       alert('Login failed. Check your email or password.');
     }
