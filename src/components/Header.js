@@ -284,6 +284,7 @@ const Header = () => {
                 <ul className="nav-menu">
                   <li className="menu-item"><a href="/">HOME</a></li>
                   <li className="menu-item"><a href="/product">PRODUCT</a></li>
+                  <li className="menu-item"><a href="/wishlist">MY WISHLIST</a></li>
                   <li className="menu-item"><a href="/blog">BLOG</a></li>
                   <li className="menu-item"><a href="/contact-us">CONTACT US</a></li>
                 </ul>

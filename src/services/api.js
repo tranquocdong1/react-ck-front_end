@@ -176,18 +176,18 @@ export const searchProducts = async (keyword) => {
 };
 
 // Giữ nguyên các API khác (Cart, Auth, Orders, Wishlist) nhưng đổi API thành api
-export const getCart = (token) => 
+export const getCart = (token) =>
   api.get('/cart', { headers: { Authorization: `Bearer ${token}` } });
-export const addToCart = (data, token) => 
+export const addToCart = (data, token) =>
   api.post('/cart/add', data, { headers: { Authorization: `Bearer ${token}` } });
-export const removeFromCart = (data, token) => 
-  api.delete('/cart/remove', { 
+export const removeFromCart = (data, token) =>
+  api.delete('/cart/remove', {
     headers: { Authorization: `Bearer ${token}` },
     data: data
   });
 export const login = (data) => api.post('/auth/login', data);
 export const register = (data) => api.post('/auth/register', data);
-export const getUserInfo = (token) => 
+export const getUserInfo = (token) =>
   api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } });
 export const getOrders = (token) =>
   api.get('/orders', { headers: { Authorization: `Bearer ${token}` } });
@@ -198,7 +198,10 @@ export const getWishlist = (token) =>
 export const addToWishlist = (data, token) =>
   api.post('/wishlist/add', data, { headers: { Authorization: `Bearer ${token}` } });
 export const removeFromWishlist = (data, token) =>
-  api.delete('/wishlist/remove', { data }, { headers: { Authorization: `Bearer ${token}` } });
+  api.delete('/wishlist/remove', {
+    headers: { Authorization: `Bearer ${token}` },
+    data: data
+  });
 
 // Export biến api để có thể sử dụng ở nơi khác nếu cần
 export default api;

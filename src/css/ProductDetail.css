@@ -224,13 +224,13 @@
 
 .add-to-cart,
 .add-to-wishlist {
-  padding: 12px 20px;
-  font-size: 16px;
-  border: none;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin-right: 10px;
+  transition: all 0.3s ease;
 }
 
 .add-to-cart {

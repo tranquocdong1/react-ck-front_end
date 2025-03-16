@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'; // Thêm useContext
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext'; // Import AuthContext
-import { getProduct, getRelatedProducts, addToCart } from '../services/api'; // Thêm addToCart
+import { AuthContext } from '../context/AuthContext';
+import { getProduct, getRelatedProducts, addToCart, addToWishlist, getWishlist } from '../services/api'; // Added wishlist API functions
 import '../css/ProductDetail.css';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext); // Lấy token từ AuthContext
+  const { token } = useContext(AuthContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,6 +16,8 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [relatedLoading, setRelatedLoading] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,6 +35,11 @@ const ProductDetail = () => {
         if (data && data.category) {
           fetchRelatedProducts(data.category);
         }
+        
+        // Check if product is in wishlist
+        if (token) {
+          checkWishlistStatus();
+        }
       } catch (err) {
         console.error('Error fetching product details:', err);
         setError(err.response?.data?.message || err.message || 'Failed to load product details');
@@ -44,7 +51,18 @@ const ProductDetail = () => {
     if (id) {
       fetchProduct();
     }
-  }, [id]);
+  }, [id, token]);
+
+  const checkWishlistStatus = async () => {
+    try {
+      const wishlistData = await getWishlist(token);
+      // Check if this product is in the wishlist
+      const isInList = wishlistData.data.some(item => item._id === id);
+      setIsInWishlist(isInList);
+    } catch (err) {
+      console.error('Error checking wishlist status:', err);
+    }
+  };
 
   const fetchRelatedProducts = async (category) => {
     try {
@@ -53,7 +71,7 @@ const ProductDetail = () => {
       const data = await getRelatedProducts(category);
       console.log('Related products data:', data);
 
-      const filteredProducts = data.filter(item => item._id !== id); // Sửa từ item.id thành item._id
+      const filteredProducts = data.filter(item => item._id !== id);
       setRelatedProducts(filteredProducts.slice(0, 4));
     } catch (err) {
       console.error('Error fetching related products:', err);
@@ -122,7 +140,7 @@ const ProductDetail = () => {
     }
   };
 
-  // Hàm xử lý thêm vào giỏ hàng
+  // Add to cart handler
   const handleAddToCart = async () => {
     if (!token) {
       alert('Please login to add products to your cart.');
@@ -136,6 +154,33 @@ const ProductDetail = () => {
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('Failed to add product to cart. Please try again.');
+    }
+  };
+
+  // Add to wishlist handler
+  const handleAddToWishlist = async () => {
+    if (!token) {
+      alert('Please login to add products to your wishlist.');
+      navigate('/login');
+      return;
+    }
+
+    // Don't add if already in wishlist
+    if (isInWishlist) {
+      alert('This product is already in your wishlist.');
+      return;
+    }
+
+    try {
+      setWishlistLoading(true);
+      await addToWishlist({ productId: id }, token);
+      setIsInWishlist(true);
+      alert('Product added to wishlist successfully!');
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+      alert('Failed to add product to wishlist. Please try again.');
+    } finally {
+      setWishlistLoading(false);
     }
   };
 
@@ -268,7 +313,13 @@ const ProductDetail = () => {
                 </div>
 
                 <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-                <button className="add-to-wishlist">Add to Wishlist</button>
+                <button 
+                  className={`add-to-wishlist ${isInWishlist ? 'in-wishlist' : ''}`}
+                  onClick={handleAddToWishlist}
+                  disabled={wishlistLoading || isInWishlist}
+                >
+                  {wishlistLoading ? 'Adding...' : isInWishlist ? 'In Wishlist' : 'Add to Wishlist'}
+                </button>
               </div>
             </div>
           </div>
