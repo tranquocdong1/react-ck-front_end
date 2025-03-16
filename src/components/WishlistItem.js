@@ -131,7 +131,7 @@ const WishlistItem = ({ item, onRemove }) => {
 
         .view-product-button {
           flex: 1;
-          background-color: #4A4A4A;
+          background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient xanh nhạt */
           color: white;
           padding: 0.5rem 1rem;
           border-radius: 0.25rem;
@@ -142,7 +142,7 @@ const WishlistItem = ({ item, onRemove }) => {
         }
 
         .view-product-button:hover {
-          background-color:rgb(44, 44, 44);
+          background: linear-gradient(135deg, #c2e9fb, #a1c4fd); /* Đảo gradient */
         }
 
         .remove-button {

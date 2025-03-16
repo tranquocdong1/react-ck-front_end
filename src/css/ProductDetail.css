@@ -234,22 +234,33 @@
 }
 
 .add-to-cart {
-  background-color: #3498db;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
   color: white;
+  border: none; /* Đảm bảo không có border mặc định */
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Giữ transition hiện tại */
 }
 
 .add-to-cart:hover {
-  background-color: #2980b9;
+  background: linear-gradient(135deg, #ff8e53, #ff6b6b);
+  transform: scale(0.95); /* Thu nhỏ khi hover */
 }
 
 .add-to-wishlist {
-  background-color: #f8f9fa;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   color: #333;
   border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Giữ transition hiện tại */
 }
 
 .add-to-wishlist:hover {
-  background-color: #e9ecef;
+  background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+  transform: scale(0.95); /* Thu nhỏ khi hover */
 }
 
 .loading-container,
@@ -421,11 +432,12 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s; /* Thêm transform vào transition */
 }
 
 .related-product-add-to-cart:hover {
   background-color: #2980b9;
+  transform: scale(0.95); /* Thu nhỏ khi hover */
 }
 
 .related-loading {
@@ -464,9 +476,26 @@
   }
 
   .slider-nav {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s, transform 0.2s; /* Thêm transform vào transition */
+  }
+  
+  .slider-nav:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-50%) scale(0.95); /* Thu nhỏ khi hover, giữ translateY */
   }
   
   .related-products-grid {
