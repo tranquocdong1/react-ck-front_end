@@ -187,6 +187,8 @@ export const removeFromCart = (data, token) =>
   });
 export const login = (data) => api.post('/auth/login', data);
 export const register = (data) => api.post('/auth/register', data);
+export const getUserInfo = (token) => 
+  api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } });
 export const getOrders = (token) =>
   api.get('/orders', { headers: { Authorization: `Bearer ${token}` } });
 export const createOrder = (data, token) =>
