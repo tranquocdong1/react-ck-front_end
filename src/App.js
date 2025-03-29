@@ -20,7 +20,7 @@ const MainLayout = () => {
     <>
       <Header />
       <main>
-        <Outlet /> {/* Nơi các component con sẽ được render */}
+        <Outlet />
       </main>
       <Footer />
     </>
