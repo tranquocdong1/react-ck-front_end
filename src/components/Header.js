@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { searchProducts } from '../services/api';
 import '../css/Header.css';
+import { searchProducts } from '../services/api';
 
 const Header = () => {
   const { token, user, handleLogout } = useContext(AuthContext); // Lấy token, user, handleLogout
@@ -144,7 +144,7 @@ const Header = () => {
                   <li className="menu-item"><a href="/wishlist">MY WISHLIST</a></li>
                   <li className="menu-item"><a href="/orders">ORDERS HISTORY</a></li>
                   <li className="menu-item"><a href="/blog">BLOG</a></li>
-                  <li className="menu-item"><a href="/contact-us">CONTACT US</a></li>
+                  <li className="menu-item"><a href="/contactus">CONTACT US</a></li>
                 </ul>
               </nav>
             </div>

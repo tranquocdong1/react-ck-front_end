@@ -1,18 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
-import AuthProvider from './context/AuthContext';
-import Header from './components/Header';
+import { Outlet, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
-import ProductList from './pages/ProductList';
-import ProductDetail from './pages/ProductDetail';
+import Header from './components/Header';
+import AuthProvider from './context/AuthContext';
 import Cart from './pages/Cart';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Orders from './pages/Orders';
-import Wishlist from './pages/Wishlist';
-import Home from './pages/Home';
-import SearchResults from './pages/SearchResults';
 import Checkout from './pages/Checkout';
+import ContactUs from './pages/ContactUs';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Orders from './pages/Orders';
+import ProductDetail from './pages/ProductDetail';
+import ProductList from './pages/ProductList';
+import Register from './pages/Register';
+import SearchResults from './pages/SearchResults';
+import Wishlist from './pages/Wishlist';
 
 // Layout cho các trang chính có Header và Footer
 const MainLayout = () => {
@@ -57,6 +58,7 @@ const App = () => (
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/contactus" element={<ContactUs />} />
           </Route>
         </Routes>
       </div>

@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef, useContext } from 'react'; // Thêm useContext
+import React, { useContext, useEffect, useRef, useState } from 'react'; // Thêm useContext
 import { Link, useNavigate } from 'react-router-dom'; // Thêm useNavigate
 import { AuthContext } from '../context/AuthContext'; // Import AuthContext
-import { getNewProducts, getBestSellers, addToCart } from '../services/api';
 import '../css/Home.css';
+import { addToCart, getBestSellers, getNewProducts } from '../services/api';
 
 const Home = () => {
   const { token } = useContext(AuthContext); // Lấy token từ AuthContext

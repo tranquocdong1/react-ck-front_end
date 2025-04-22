@@ -205,3 +205,20 @@ export const removeFromWishlist = (data, token) =>
 
 // Export biến api để có thể sử dụng ở nơi khác nếu cần
 export default api;
+
+export const submitContactForm = async (formData, token) => {
+  const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to submit contact form');
+  }
+
+  return response.json();
+};
