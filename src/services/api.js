@@ -1,15 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
-const api = axios.create({ baseURL: 'http://localhost:5000/api' });
+const api = axios.create({ baseURL: "http://localhost:5000/api" });
 
 // PRODUCTS APIs
 // Lấy danh sách tất cả sản phẩm
 export const getProducts = async () => {
   try {
-    const response = await api.get('/products');
+    const response = await api.get("/products");
     return response.data;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     throw error;
   }
 };
@@ -31,7 +31,10 @@ export const getRelatedProducts = async (category) => {
     const response = await api.get(`/products/related/${category}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching related products for category "${category}":`, error);
+    console.error(
+      `Error fetching related products for category "${category}":`,
+      error
+    );
     throw error;
   }
 };
@@ -39,10 +42,10 @@ export const getRelatedProducts = async (category) => {
 // Lấy danh sách sản phẩm mới
 export const getNewProducts = async () => {
   try {
-    const response = await api.get('/products/home/new-products');
+    const response = await api.get("/products/home/new-products");
     return response.data;
   } catch (error) {
-    console.error('Error fetching new products:', error);
+    console.error("Error fetching new products:", error);
     throw error;
   }
 };
@@ -50,10 +53,10 @@ export const getNewProducts = async () => {
 // Lấy danh sách sản phẩm best seller
 export const getBestSellers = async () => {
   try {
-    const response = await api.get('/products/home/best-sellers');
+    const response = await api.get("/products/home/best-sellers");
     return response.data;
   } catch (error) {
-    console.error('Error fetching best sellers:', error);
+    console.error("Error fetching best sellers:", error);
     throw error;
   }
 };
@@ -61,10 +64,10 @@ export const getBestSellers = async () => {
 // Lấy cả sản phẩm mới và best seller cho trang home
 export const getFeaturedProducts = async () => {
   try {
-    const response = await api.get('/products/home/featured');
+    const response = await api.get("/products/home/featured");
     return response.data;
   } catch (error) {
-    console.error('Error fetching featured products:', error);
+    console.error("Error fetching featured products:", error);
     throw error;
   }
 };
@@ -72,12 +75,12 @@ export const getFeaturedProducts = async () => {
 // Tạo mới một sản phẩm
 export const createProduct = async (data, token) => {
   try {
-    const response = await api.post('/products', data, {
-      headers: { Authorization: `Bearer ${token}` }
+    const response = await api.post("/products", data, {
+      headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
   } catch (error) {
-    console.error('Error creating product:', error);
+    console.error("Error creating product:", error);
     throw error;
   }
 };
@@ -86,7 +89,7 @@ export const createProduct = async (data, token) => {
 export const updateProduct = async (id, data, token) => {
   try {
     const response = await api.put(`/products/${id}`, data, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
   } catch (error) {
@@ -99,7 +102,7 @@ export const updateProduct = async (id, data, token) => {
 export const deleteProduct = async (id, token) => {
   try {
     const response = await api.delete(`/products/${id}`, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
   } catch (error) {
@@ -133,7 +136,10 @@ export const setNewProductStatus = async (id, isNewProduct, token) => {
     );
     return response.data;
   } catch (error) {
-    console.error(`Error updating new product status for product ${id}:`, error);
+    console.error(
+      `Error updating new product status for product ${id}:`,
+      error
+    );
     throw error;
   }
 };
@@ -177,48 +183,56 @@ export const searchProducts = async (keyword) => {
 
 // Giữ nguyên các API khác (Cart, Auth, Orders, Wishlist) nhưng đổi API thành api
 export const getCart = (token) =>
-  api.get('/cart', { headers: { Authorization: `Bearer ${token}` } });
+  api.get("/cart", { headers: { Authorization: `Bearer ${token}` } });
 export const addToCart = (data, token) =>
-  api.post('/cart/add', data, { headers: { Authorization: `Bearer ${token}` } });
+  api.post("/cart/add", data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 export const removeFromCart = (data, token) =>
-  api.delete('/cart/remove', {
+  api.delete("/cart/remove", {
     headers: { Authorization: `Bearer ${token}` },
-    data: data
+    data: data,
   });
-export const login = (data) => api.post('/auth/login', data);
-export const register = (data) => api.post('/auth/register', data);
+export const login = (data) => api.post("/auth/login", data);
+export const register = (data) => api.post("/auth/register", data);
 export const getUserInfo = (token) =>
-  api.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } });
+  api.get("/auth/me", { headers: { Authorization: `Bearer ${token}` } });
 export const getOrders = (token) =>
-  api.get('/orders', { headers: { Authorization: `Bearer ${token}` } });
+  api.get("/orders", { headers: { Authorization: `Bearer ${token}` } });
 export const createOrder = (data, token) =>
-  api.post('/orders', data, { headers: { Authorization: `Bearer ${token}` } });
+  api.post("/orders", data, { headers: { Authorization: `Bearer ${token}` } });
 export const getWishlist = (token) =>
-  api.get('/wishlist', { headers: { Authorization: `Bearer ${token}` } });
+  api.get("/wishlist", { headers: { Authorization: `Bearer ${token}` } });
 export const addToWishlist = (data, token) =>
-  api.post('/wishlist/add', data, { headers: { Authorization: `Bearer ${token}` } });
-export const removeFromWishlist = (data, token) =>
-  api.delete('/wishlist/remove', {
+  api.post("/wishlist/add", data, {
     headers: { Authorization: `Bearer ${token}` },
-    data: data
   });
+export const removeFromWishlist = (data, token) =>
+  api.delete("/wishlist/remove", {
+    headers: { Authorization: `Bearer ${token}` },
+    data: data,
+  });
+export const submitContactForm = async (data) => {
+  try {
+    const response = await api.post("/contact", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting contact form:", error);
+    throw error;
+  }
+};
 
+// Get all contact messages (for admin)
+export const getContactMessages = async (token) => {
+  try {
+    const response = await api.get("/contact", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching contact messages:", error);
+    throw error;
+  }
+};
 // Export biến api để có thể sử dụng ở nơi khác nếu cần
 export default api;
-
-export const submitContactForm = async (formData, token) => {
-  const response = await fetch('/api/contact', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(formData),
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to submit contact form');
-  }
-
-  return response.json();
-};

@@ -15,6 +15,8 @@ import Register from './pages/Register';
 import SearchResults from './pages/SearchResults';
 import Wishlist from './pages/Wishlist';
 
+
+
 // Layout cho các trang chính có Header và Footer
 const MainLayout = () => {
   return (
@@ -58,7 +60,7 @@ const App = () => (
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/contact" element={<ContactUs />} />
           </Route>
         </Routes>
       </div>
