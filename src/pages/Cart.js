@@ -58,7 +58,7 @@ const Cart = () => {
 
   return (
     <div style={{ maxWidth: '800px', margin: '50px auto' }}>
-      <h1>Your Cart</h1>
+      <h1>My Cart</h1>
       {loading ? (
         <p>Loading...</p>
       ) : cart.length === 0 ? (
