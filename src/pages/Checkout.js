@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { getCart } from '../services/api';
+import { getCart, createOrder } from '../services/api';
 
 const Checkout = () => {
   const { token } = useContext(AuthContext);
@@ -44,10 +44,30 @@ const Checkout = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would add the logic to submit the order
-    // For example: await createOrder({ ...formData, items: cart, shippingFee }, token);
-    alert('Order placed successfully!');
-    navigate('/orders');
+    try {
+      // Prepare order data
+      const orderData = {
+        ...formData,
+        items: cart.map(item => ({
+          productId: item.productId._id,
+          quantity: item.quantity,
+          price: item.productId.price
+        })),
+        subtotal,
+        shippingFee,
+        totalPrice
+      };
+
+      // Create order in MongoDB
+      await createOrder(orderData, token);
+      
+      // Show success message and redirect
+      alert('Order placed successfully!');
+      navigate('/orders');
+    } catch (error) {
+      console.error('Error creating order:', error);
+      alert('Failed to place order. Please try again.');
+    }
   };
 
   // Calculate subtotal

@@ -175,6 +175,7 @@ export const searchProducts = async (keyword) => {
   }
 };
 
+
 // Giữ nguyên các API khác (Cart, Auth, Orders, Wishlist) nhưng đổi API thành api
 export const getCart = (token) =>
   api.get('/cart', { headers: { Authorization: `Bearer ${token}` } });
@@ -202,6 +203,8 @@ export const removeFromWishlist = (data, token) =>
     headers: { Authorization: `Bearer ${token}` },
     data: data
   });
+
+
 
 // Export biến api để có thể sử dụng ở nơi khác nếu cần
 export default api;

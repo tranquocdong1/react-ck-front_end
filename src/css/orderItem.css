@@ -1,0 +1,70 @@
+/* CSS cho đơn hàng */
+.order-item {
+  background: linear-gradient(145deg, #f3f4f6, #e1e2e6);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.order-item:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.order-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e1e2e6;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.order-item-title {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.order-item-status {
+  font-size: 1.1rem;
+  color: #16a085;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.order-item-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-item-total {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-top: 10px;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .order-item {
+    padding: 15px;
+  }
+
+  .order-item-title {
+    font-size: 1.4rem;
+  }
+
+  .order-item-status {
+    font-size: 1rem;
+  }
+
+  .order-item-total {
+    font-size: 1.2rem;
+  }
+}
